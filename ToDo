@@ -1,0 +1,137 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Vector;
+/* ArrayList: Usamos para armazenar a lista de tarefas de forma dinâmica
+   Scanner: Para ler a entrada do usuário pelo terminal */
+
+public class ToDoList {
+    private static ArrayList<String> tasks = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
+/* tasks: ArrayList que armazenará nossas tarefas (strings)
+   scanner: Objeto para capturar entrada do usuário */
+
+    public static void main(String[] args) {
+        boolean running = true;
+
+        while (running) {
+            //Menu de opções
+            System.out.println("\n To Do List");
+            System.out.println("1 - Adicionar Tarefa");
+            System.out.println("2 - Remover Tarefa");
+            System.out.println("3 - Listar Tarefas");
+            System.out.println("4 -Sair");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Limpar o buffer
+
+            switch (choice) {
+                case 1:
+                    addTask();
+                    break;
+
+                case 2:
+                    removeTask();
+                    break;
+
+                case 3:
+                    listTasks();
+                    break;
+
+                case 4:
+                    running = false;
+                    System.out.println("Saindo da Aplicação");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+
+        scanner.close();
+    }
+
+
+/*running: Controla o loop principal (enquanto true, o programa continua)
+  Exibe um menu com 4 opções
+  Usa switch para chamar o método correspondente à opção escolhida
+  scanner.nextLine() após nextInt() evita problemas com o buffer de entrada
+  Fecha o scanner quando o programa termina */
+
+    private static void addTask() {
+        System.out.println("Digite a tarefa a ser adicionada: ");
+        String task = scanner.nextLine();
+        tasks.add(task);
+        System.out.println("Tarefa adicionada com sucesso! ");
+
+
+/* Pede ao usuário para digitar a tarefa
+Lê a entrada com scanner.nextLine()
+Adiciona a tarefa ao ArrayList tasks
+Confirma a adição */
+
+    }
+
+    private static void removeTask() {
+        if (tasks.isEmpty()) {
+            System.out.println("Não há tarefas para remover!");
+            return;
+        }
+
+        System.out.println("Tarefas Disponíveis: ");
+        for (int i = 0; i < tasks.size(); i++)
+        {
+            System.out.println((i + 1) + ". " + tasks.get(i));
+        }
+
+        System.out.println("Digite o número da tarefa a ser removida: ");
+        int taskNumber = scanner.nextInt();
+        scanner.nextLine(); //limpa o buffer
+
+        if (taskNumber < 1 || taskNumber > tasks.size()) {
+            System.out.println("Número de tarefa inválido");
+        } else {
+            String removedTask = tasks.remove(taskNumber - 1);
+            System.out.println("Tarefa ' " + removedTask + "' Removida com sucesso! ");
+        }
+    }
+
+/* Primeiro verifica se há tarefas para remover
+Lista todas as tarefas numeradas
+Pede ao usuário o número da tarefa a remover
+Verifica se o número é válido
+Remove a tarefa (subtrai 1 porque a lista começa em 0)
+Mostra mensagem de confirmação */
+
+    private static void listTasks(){
+        if (tasks.isEmpty()) {
+            System.out.println("Não há tarefas na lista! ");
+            return;
+        }
+
+        System.out.println(" Suas tarefas: ");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i));
+        }
+    }
+/* Verifica se a lista está vazia
+Se não estiver, imprime todas as tarefas numeradas */
+
+/*
+Fluxo do Programa:
+Inicia mostrando o menu
+Usuário escolhe uma opção
+Programa executa a ação correspondente
+Volta ao menu até que o usuário escolha sair
+Fecha o scanner e encerra
+
+
+Conceitos Importantes Usados:
+ArrayList: Lista dinâmica que cresce conforme necessário
+Scanner: Para interação com o usuário via console
+Switch-case: Para controle do fluxo do programa
+Métodos estáticos: Para organizar a funcionalidade
+Controle de fluxo: Loops e condicionais
+*/
+
+
+}
